@@ -1,7 +1,7 @@
 import { FidgetSpinner } from "react-loader-spinner";
-import "./Loader.module.scss";
+import "./Loader.scss";
 
-const Loader = () => {
+const Loader: React.FC = () => {
   return (
     <div className="overlay">
       <FidgetSpinner
