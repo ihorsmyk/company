@@ -3,7 +3,7 @@ import "./Logo.scss";
 
 const Logo: React.FC = () => {
   return (
-    <Link to="/">
+    <Link className="" to="/">
       <h2 className="logo">
         IGOR <span className="logo__span">GROWTH</span>
       </h2>

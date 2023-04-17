@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
-import company from "../../store/company";
+import { observer } from "mobx-react-lite";
+import company from "../../utils/stores/company";
 
-const PublicRoute: React.FC = () => {
-  const token: boolean = company.token;
-  return token ? <Navigate to="/login" /> : <Outlet />; // HACK
-};
+const PublicRoute: React.FC = observer(() => {
+  return company.token ? <Navigate to="/" /> : <Outlet />;
+});
 
 export default PublicRoute;

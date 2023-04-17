@@ -1,17 +1,16 @@
-import { FidgetSpinner } from "react-loader-spinner";
+import { Triangle } from "react-loader-spinner";
 import "./Loader.scss";
 
 const Loader: React.FC = () => {
   return (
     <div className="overlay">
-      <FidgetSpinner
-        visible={true}
+      <Triangle
         height="80"
         width="80"
-        ariaLabel="dna-loading"
-        wrapperClass="dna-wrapper"
-        ballColors={["#01b4e4", "#90cea1", "#ffffff"]}
-        backgroundColor="#0d253f"
+        color="#4fa94d"
+        ariaLabel="triangle-loading"
+        wrapperStyle={{}}
+        visible={true}
       />
     </div>
   );

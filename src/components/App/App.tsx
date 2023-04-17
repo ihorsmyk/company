@@ -1,46 +1,85 @@
 import { Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { ToastContainer } from "react-toastify";
 import Loader from "../Loader/Loader";
 import Layout from "../Layout/Layout";
-import EmployeeListPublicPage from "../../pages/EmployeeListPublicPage/EmployeeListPublicPage";
 import PublicRoute from "../PublicRoute/PublicRoute";
-import Registration from "../../pages/Registration/Registration";
-import Login from "../../pages/Login/Login";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import EmployeeListPrivatePage from "../../pages/EmployeeListPrivatePage/EmployeeListPrivatePage";
-import Projects from "../../pages/Projects/Projects";
-import Chat from "../../pages/Chat/Chat";
-import Home from "../../pages/Home/Home";
-import company from "../../store/company";
-import EmployeeDetails from "../../pages/EmployeeDetails/EmployeeDetails";
-import ProjectDetails from "../../pages/ProjectDetails/ProjectDetails";
+import "react-toastify/dist/ReactToastify.css";
+
+const Home = lazy(() => import("../../pages/Home/Home"));
+const Login = lazy(() => import("../../pages/Login/Login"));
+const Registration = lazy(
+  () => import("../../pages/Registration/Registration")
+);
+const EmployeeListPage = lazy(
+  () => import("../../pages/EmployeeListPage/EmployeeListPage")
+);
+const EmployeeDetails = lazy(
+  () => import("../../pages/EmployeeDetails/EmployeeDetails")
+);
+const UpdateEmployeePage = lazy(
+  () => import("../../pages/UpdateEmployeePage/UpdateEmployeePage")
+);
+const AddEmployeeFormPage = lazy(
+  () => import("../../pages/AddEmployeeFormPage/AddEmployeeFormPage")
+);
+const ProjectListPage = lazy(
+  () => import("../../pages/ProjectsListPage/ProjectsListPage")
+);
+const ProjectDetails = lazy(
+  () => import("../../pages/ProjectDetails/ProjectDetails")
+);
+const UpdateProjectPage = lazy(
+  () => import("../../pages/UpdateProjectPage/UpdateProjectPage")
+);
+const AddProjectFormPage = lazy(
+  () => import("../../pages/AddProjectFormPage/AddProjectFormPage")
+);
+const NotFound = lazy(() => import("../../pages/NotFound/NotFound"));
+const Chat = lazy(() => import("../../pages/Chat/Chat"));
 
 const App: React.FC = () => {
-  const isLoading: boolean = company.isLoading;
-
   return (
     <>
-      {isLoading && <Loader />}
-
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<EmployeeListPublicPage />} />
-          <Route path="/" element={<PublicRoute />}>
-            <Route path="employee" element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="registration" element={<Registration />} />
+      <ToastContainer />
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/" element={<PublicRoute />}>
+              <Route path="login" element={<Login />} />
+              <Route path="registration" element={<Registration />} />
+            </Route>
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="employees" element={<EmployeeListPage />} />
+              <Route
+                path="employees/:employeeId/*"
+                element={<EmployeeDetails />}
+              />
+              <Route
+                path="employees/:employeeId/updateemp"
+                element={<UpdateEmployeePage />}
+              />
+              <Route path="newemployee" element={<AddEmployeeFormPage />} />
+              <Route path="projects" element={<ProjectListPage />} />
+              <Route
+                path="projects/:projectId/*"
+                element={<ProjectDetails />}
+              />
+              <Route
+                path="projects/:projectId/updateproj"
+                element={<UpdateProjectPage />}
+              />
+              <Route path="newproject" element={<AddProjectFormPage />} />
+              <Route path="chat" element={<Chat />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
           </Route>
-          <Route path="/" element={<PrivateRoute />}>
-            <Route path="employees" element={<EmployeeListPrivatePage />} />
-            <Route path="employees/:employeeId/*" element={<EmployeeDetails />} />
-            <Route path="projects" element={<Projects />} />
-            <Route path="projects/:projectId/*" element={<ProjectDetails />} />
-            <Route path="chat" element={<Chat />} />
-          </Route>
-        </Route>
-      </Routes>
+        </Routes>
+      </Suspense>
     </>
   );
 };
 
 export default App;
-
