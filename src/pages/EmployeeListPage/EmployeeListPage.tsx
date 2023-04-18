@@ -1,21 +1,23 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, FC } from "react";
+import { toast } from "react-toastify";
 import { observer } from "mobx-react-lite";
 import company from "../../utils/stores/company";
 import Loader from "../../components/Loader/Loader";
 import { EmployeeType } from "../../utils/types/employee";
 import "./EmployeeListPage.scss";
 
-const EmployeeListPage: React.FC = observer(() => {
+const EmployeeListPage: FC = observer(() => {
+  const [error, setError] = useState<string | null>(null);
   const location = useLocation();
   const [page, setPage] = useState(0);
 
-  const getEmployees = async (page: number) => {
+  const getEmployees = async (page: number): Promise<void> => {
     try {
       company.setIsLoading(true);
       await company.fetchEmployees(page);
     } catch (error: any) {
-      company.setError(error.message);
+      setError(error.message);
     } finally {
       company.setIsLoading(false);
     }
@@ -24,6 +26,13 @@ const EmployeeListPage: React.FC = observer(() => {
   useEffect(() => {
     getEmployees(page);
   }, [page]);
+
+  useEffect(() => {
+    if (!error) return;
+    toast.error(error, {
+      autoClose: 2000,
+    });
+  }, [error]);
 
   const handleChangePage = () => {
     setPage((prev) => prev + 1);

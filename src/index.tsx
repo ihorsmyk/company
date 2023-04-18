@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/it_company">
+    <BrowserRouter basename="/itcompany">
       <App />
     </BrowserRouter>
   </React.StrictMode>

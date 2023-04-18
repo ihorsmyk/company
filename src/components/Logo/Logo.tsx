@@ -1,12 +1,14 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import "./Logo.scss";
 
-const Logo: React.FC = () => {
+const Logo: FC = () => {
   return (
-    <Link className="" to="/">
-      <h2 className="logo">
-        IGOR <span className="logo__span">GROWTH</span>
-      </h2>
+    <Link className="logo__link" to="/">
+      <h1 className="logo">
+        I<span className="logo__span">GO</span>R
+        <span className="logo__span">GROW</span>TH
+      </h1>
     </Link>
   );
 };

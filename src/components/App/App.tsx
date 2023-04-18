@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, FC } from "react";
 import { ToastContainer } from "react-toastify";
 import Loader from "../Loader/Loader";
 import Layout from "../Layout/Layout";
@@ -39,7 +39,7 @@ const AddProjectFormPage = lazy(
 const NotFound = lazy(() => import("../../pages/NotFound/NotFound"));
 const Chat = lazy(() => import("../../pages/Chat/Chat"));
 
-const App: React.FC = () => {
+const App: FC = () => {
   return (
     <>
       <ToastContainer />

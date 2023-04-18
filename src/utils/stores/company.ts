@@ -46,7 +46,7 @@ class Company {
   }
 
   async fetchEmployees(page: number) {
-    const { data }: AxiosResponse = await companyService.get("employee", {
+    const { data }: AxiosResponse = await companyService.get("employees", {
       params: { page },
     });
 
@@ -61,7 +61,7 @@ class Company {
   }
 
   async fetchProjects(page: number) {
-    const { data }: AxiosResponse = await companyService.get("project", {
+    const { data }: AxiosResponse = await companyService.get("projects", {
       params: { page },
     });
     const projects: Array<ProjectType> = [];

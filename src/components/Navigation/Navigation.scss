@@ -1,4 +1,37 @@
 .navigation {
-    display: flex;
-    column-gap: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: inherit;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 18px;
+  column-gap: 10px;
+
+  &__link {
+    color: var(--primary-text);
+    margin: 0 10px;
+    position: relative;
+    transition: all 150ms linear;
+  }
+
+  &__link:hover,
+  &__link:focus {
+    color: var(--blue);
+    // transform: scale(1.1);
+  }
+
+  &__link.active {
+    color: var(--blue);
+  }
+
+  &__link.active:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 3px;
+    background-color: var(--blue);
+  }
 }

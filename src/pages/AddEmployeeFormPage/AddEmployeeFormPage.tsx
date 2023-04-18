@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 import company from "../../utils/stores/company";
 import Loader from "../../components/Loader/Loader";
 import "./AddEmployeeFormPage.scss";
+import { toast } from "react-toastify";
 
 const AddEmployeeFormPage: React.FC = observer(() => {
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const [employeeInfo, setEmployeeInfo] = useState<any>({
     firstName: "",
@@ -44,7 +45,7 @@ const AddEmployeeFormPage: React.FC = observer(() => {
 
   useEffect(() => {
     if (!error) return;
-    // Notify.failure(`some error occured ${error}`);
+    toast.error(error);
   }, [error]);
 
   return (

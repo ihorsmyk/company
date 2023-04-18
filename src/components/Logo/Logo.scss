@@ -1,3 +1,10 @@
 .logo {
-  font-family: "Wallpoet", cursive;
+  font-family: "Galdeano", sans-serif;
+  color: var(--primary-text);
+  font-weight: 600;
+  font-size: 25px;
+
+  &__span {
+    color: var(--blue);
+  }
 }

@@ -3,7 +3,7 @@ import { EmployeeType } from "../types/employee";
 import { ProjectType } from "../types/project";
 
 export const companyService: AxiosInstance = axios.create({
-  baseURL: "http://localhost:8080/api/",
+  baseURL: "http://ec2-3-129-6-39.us-east-2.compute.amazonaws.com:8081/api/",
   params: {
     pageSize: 10,
   },
@@ -12,7 +12,7 @@ export const companyService: AxiosInstance = axios.create({
 //EMPLOYEE
 
 export const getEmployeeById = async (id: number) => {
-  const { data }: AxiosResponse = await companyService.get(`employee/${id}`);
+  const { data }: AxiosResponse = await companyService.get(`employees/${id}`);
   return data;
 };
 
@@ -21,20 +21,20 @@ export const updateEmployeeById = async (
   employee: EmployeeType
 ) => {
   const response: AxiosResponse = await companyService.put(
-    `employee/${id}`,
+    `employees/${id}`,
     employee
   );
   return response;
 };
 
 export const deleteEmployeeById = async (id: number) => {
-  const response: AxiosResponse = await companyService.delete(`employee/${id}`);
+  const response: AxiosResponse = await companyService.delete(`employees/${id}`);
   return response;
 };
 
 export const addEpmloyee = async (employee: any) => {
   const response: AxiosResponse = await companyService.post(
-    "employee",
+    "employees",
     employee
   );
   return response;
@@ -43,26 +43,26 @@ export const addEpmloyee = async (employee: any) => {
 //PROJECT
 
 export const getProjectById = async (id: number) => {
-  const { data }: AxiosResponse = await companyService.get(`project/${id}`);
+  const { data }: AxiosResponse = await companyService.get(`projects/${id}`);
   return data;
 };
 
 export const updateProjectById = async (id: number, project: ProjectType) => {
   const response: AxiosResponse = await companyService.put(
-    `project/${id}`,
+    `projects/${id}`,
     project
   );
   return response;
 };
 
 export const deleteProjectById = async (id: number) => {
-  const response: AxiosResponse = await companyService.delete(`project/${id}`);
+  const response: AxiosResponse = await companyService.delete(`projects/${id}`);
   return response;
 };
 
 export const addProject = async (project: any) => {
     const response: AxiosResponse = await companyService.post(
-      "project",
+      "projects",
       project
     );
     return response;

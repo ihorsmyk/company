@@ -1,0 +1,33 @@
+.employee-list {
+  padding: 15px;
+  max-width: max-content;
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    padding: 13px;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 3px;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &__item:hover,
+  &__item:focus {
+    background-color: #0d253f;
+    color: #90cea1;
+  }
+
+  &__fullname {
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    color: var(--primary-text);
+  }
+
+  &__position {
+    color: var(--blue);
+    font-size: 16px;
+  }
+}

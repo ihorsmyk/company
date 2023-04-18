@@ -1,9 +1,10 @@
+import { FC } from "react";
 import "./Home.scss";
 
-const Home: React.FC = () => {
+const Home: FC = () => {
   return (
     <div className="home">
-      <h1 className="home__title">IGORGROWTH</h1>
+      <h2 className="home__title">IGORGROWTH</h2>
       <p className="home__description">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Est natus eius
         magnam, culpa exercitationem dolore earum voluptate ipsa voluptatem iure

@@ -1,20 +1,39 @@
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
-import company from "../../utils/stores/company";
 import { observer } from "mobx-react-lite";
+import company from "../../utils/stores/company";
 import "./Navigation.scss";
 
-const Navigation: React.FC = observer(() => {
+const Navigation: FC = observer(() => {
   return (
     <nav className="navigation">
-      <NavLink to={company.token ? "/employees" : "/login"}>
+      <NavLink
+        className="navigation__link"
+        to={company.token ? "/employees" : "/login"}
+      >
         {company.token ? "EMPLOYEES" : "LOG IN"}
       </NavLink>
-      <NavLink to={company.token ? "/projects" : "/registration"}>
+      <NavLink
+        className="navigation__link"
+        to={company.token ? "/projects" : "/registration"}
+      >
         {company.token ? "PROJECTS" : "REGISTRATION"}
       </NavLink>
-      {company.token && <NavLink to="/chat"> CHAT </NavLink>}
-      {company.token && <NavLink to="/newemployee"> ADD EMPLOYEE </NavLink>}
-      {company.token && <NavLink to="/newproject"> ADD PROJECT </NavLink>}
+      {company.token && (
+        <NavLink className="navigation__link" to="/chat">
+          CHAT
+        </NavLink>
+      )}
+      {company.token && (
+        <NavLink className="navigation__link" to="/newemployee">
+          ADD EMPLOYEE
+        </NavLink>
+      )}
+      {company.token && (
+        <NavLink className="navigation__link" to="/newproject">
+          ADD PROJECT
+        </NavLink>
+      )}
     </nav>
   );
 });

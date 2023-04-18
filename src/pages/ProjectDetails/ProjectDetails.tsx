@@ -10,8 +10,10 @@ import Loader from "../../components/Loader/Loader";
 import company from "../../utils/stores/company";
 import "./ProjectDetails.scss";
 import IsSureModal from "../../components/IsSureModal/IsSureModal";
+import { toast } from "react-toastify";
 
 const ProjectDetails: React.FC = observer(() => {
+  const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const [projecttInfo, setProjectInfo] = useState<ProjectType | undefined>(
@@ -35,7 +37,7 @@ const ProjectDetails: React.FC = observer(() => {
         const response = await deleteProjectById(projectId);
         console.log(response);
       } catch (error: any) {
-        company.setError(error.message);
+        setError(error.message);
       } finally {
         company.setIsLoading(false);
         navigate("/");
@@ -63,6 +65,11 @@ const ProjectDetails: React.FC = observer(() => {
     getProjectInfo(Number(projectId));
   }, [projectId]);
 
+    useEffect(() => {
+      if (!error) return;
+      toast.error(error);
+    }, [error]);
+
   return (
     <>
       <Link className="project__go-back" to={location?.state?.from ?? "/"}>
@@ -73,6 +80,10 @@ const ProjectDetails: React.FC = observer(() => {
 
       <div className="project">
         <h2 className="project__name"> {projecttInfo?.name} </h2>
+        <p className="project__members">
+          {" "}
+          {projecttInfo?.employeeList?.length}{" "}
+        </p>
       </div>
 
       <Link className="project__update" to={"updateproj"}>
