@@ -36,7 +36,11 @@ const EmployeeDetails: React.FC = observer(() => {
       try {
         company.setIsLoading(true);
         const response = await deleteEmployeeById(employeeId);
-        console.log(response);
+        if (response.status === 200) {
+          toast.success("deleted successfully", {
+            autoClose: 2000,
+          });
+        }
       } catch (error: any) {
         setError(error.message);
       } finally {

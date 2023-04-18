@@ -24,7 +24,7 @@ const AddEmployeeFormPage: React.FC = observer(() => {
       company.setIsLoading(true);
       const response = await addEpmloyee(employeeInfo);
       if (response.status === 201) {
-        toast.success("updated successfully", {
+        toast.success("added successfully", {
           autoClose: 2000,
         });
       }
