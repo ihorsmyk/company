@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/919.8621b5e7.chunk.js","mappings":"+HAOA,UANc,WACZ,OACEA,EAAAA,EAAAA,KAAA,OAAAC,SAAK,SAET,C","sources":["pages/Login/Login.tsx"],"sourcesContent":["\r\nconst Login = () => {\r\n  return (\r\n    <div>Login</div>\r\n  )\r\n}\r\n\r\nexport default Login;"],"names":["_jsx","children"],"sourceRoot":""}
