@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
+import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import { ProjectType } from "../../utils/types/project";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
@@ -8,13 +9,13 @@ import {
 } from "../../utils/services/companyAPI";
 import Loader from "../../components/Loader/Loader";
 import company from "../../utils/stores/company";
-import "./ProjectDetails.scss";
 import IsSureModal from "../../components/IsSureModal/IsSureModal";
 import { toast } from "react-toastify";
+import "./ProjectDetails.scss";
 
 const ProjectDetails: React.FC = observer(() => {
   const [error, setError] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const [projecttInfo, setProjectInfo] = useState<ProjectType | undefined>(
     undefined
@@ -22,15 +23,15 @@ const ProjectDetails: React.FC = observer(() => {
   const location = useLocation();
   const { projectId } = useParams();
 
-  const handleDeleteProject = () => {
+  const handleDeleteProject = (): void => {
     setIsModalOpen(true);
   };
 
-  const handleCancel = () => {
+  const handleCancel = (): void => {
     setIsModalOpen(false);
   };
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = (): void => {
     (async (projectId: number) => {
       try {
         company.setIsLoading(true);
@@ -47,7 +48,7 @@ const ProjectDetails: React.FC = observer(() => {
     setIsModalOpen(false);
   };
 
-  const getProjectInfo = async (projectId: number) => {
+  const getProjectInfo = async (projectId: number): Promise<void> => {
     try {
       company.setIsLoading(true);
       const receivedProjectInfo: ProjectType | undefined = await getProjectById(
@@ -55,7 +56,7 @@ const ProjectDetails: React.FC = observer(() => {
       );
       setProjectInfo(receivedProjectInfo);
     } catch (error: any) {
-      company.setError(error.message);
+      setError(error.message);
     } finally {
       company.setIsLoading(false);
     }
@@ -65,38 +66,40 @@ const ProjectDetails: React.FC = observer(() => {
     getProjectInfo(Number(projectId));
   }, [projectId]);
 
-    useEffect(() => {
-      if (!error) return;
-      toast.error(error);
-    }, [error]);
+  useEffect(() => {
+    if (!error) return;
+    toast.error(error, {
+      autoClose: 2000,
+    });
+  }, [error]);
 
   return (
     <>
-      <Link className="project__go-back" to={location?.state?.from ?? "/"}>
-        GO BACK
-      </Link>
-
       {company.isLoading && <Loader />}
 
-      <div className="project">
-        <h2 className="project__name"> {projecttInfo?.name} </h2>
-        <p className="project__members">
-          {" "}
-          {projecttInfo?.employeeList?.length}{" "}
-        </p>
+      <div data-aos="fade-up" data-aos-duration="800" className="project">
+        <Link className="project__go-back" to={location?.state?.from ?? "/"}>
+          <BsFillArrowLeftSquareFill size="33px" />
+        </Link>
+
+        <h2 className="project__name">
+          <span className="project__span">project name: </span>
+          {projecttInfo?.name}
+        </h2>
+
+        <div className="project__btns">
+          <Link className="project__update" to={"updateproj"}>
+            UPDATE
+          </Link>
+          <button
+            className="project__delete"
+            type="submit"
+            onClick={handleDeleteProject}
+          >
+            DELETE
+          </button>
+        </div>
       </div>
-
-      <Link className="project__update" to={"updateproj"}>
-        UPDATE
-      </Link>
-
-      <button
-        className="project__delete"
-        type="submit"
-        onClick={handleDeleteProject}
-      >
-        DELETE
-      </button>
 
       <IsSureModal
         isOpen={isModalOpen}

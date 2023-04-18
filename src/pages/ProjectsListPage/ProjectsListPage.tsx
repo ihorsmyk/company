@@ -4,18 +4,20 @@ import company from "../../utils/stores/company";
 import { observer } from "mobx-react-lite";
 import Loader from "../../components/Loader/Loader";
 import { ProjectType } from "../../utils/types/project";
+import { toast } from "react-toastify";
 import "./ProjectsListPage.scss";
 
 const ProjectsListPage: React.FC = observer(() => {
-  const location = useLocation();
+  const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(0);
+  const location = useLocation();
 
   const getProjects = async (page: number) => {
     try {
       company.setIsLoading(true);
       await company.fetchProjects(page);
     } catch (error: any) {
-      company.setError(error.message);
+      setError(error.message);
     } finally {
       company.setIsLoading(false);
     }
@@ -24,6 +26,13 @@ const ProjectsListPage: React.FC = observer(() => {
   useEffect(() => {
     getProjects(page);
   }, [page]);
+
+  useEffect(() => {
+    if (!error) return;
+    toast.error(error, {
+      autoClose: 2000,
+    });
+  }, [error]);
 
   const handleChangePage = () => {
     setPage((prev) => prev + 1);
@@ -41,7 +50,7 @@ const ProjectsListPage: React.FC = observer(() => {
                 to={String(p.id)}
                 className="project-list__link"
               >
-                <h2 className="project-list__name"> {p.name} </h2>
+                <h2 className="project-list__name">{p.name}</h2>
               </Link>
             </li>
           );

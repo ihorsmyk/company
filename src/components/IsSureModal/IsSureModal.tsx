@@ -14,9 +14,13 @@ const IsSureModal: FC<IModalProps> = ({ isOpen, onCancel, onConfirm }) => {
   return (
     <Modal className="modal" overlayClassName="modal__overlay" isOpen={isOpen}>
       <div className="modal-content">
-        <h2 className="modal__info">confirm deletion</h2>
-        <button className="modal__btn" onClick={onCancel}>no no no!!</button>
-        <button className="modal__btn" onClick={onConfirm}>delete</button>
+        <h2 className="modal__info">are you sure?</h2>
+        <button className="modal__btn" onClick={onCancel}>
+          NO NO NO!!
+        </button>
+        <button className="modal__btn" onClick={onConfirm}>
+          DELETE
+        </button>
       </div>
     </Modal>
   );

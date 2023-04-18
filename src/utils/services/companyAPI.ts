@@ -28,7 +28,9 @@ export const updateEmployeeById = async (
 };
 
 export const deleteEmployeeById = async (id: number) => {
-  const response: AxiosResponse = await companyService.delete(`employees/${id}`);
+  const response: AxiosResponse = await companyService.delete(
+    `employees/${id}`
+  );
   return response;
 };
 
@@ -61,9 +63,9 @@ export const deleteProjectById = async (id: number) => {
 };
 
 export const addProject = async (project: any) => {
-    const response: AxiosResponse = await companyService.post(
-      "projects",
-      project
-    );
-    return response;
-}
+  const response: AxiosResponse = await companyService.post(
+    "projects",
+    project
+  );
+  return response;
+};

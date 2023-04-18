@@ -23,7 +23,11 @@ const AddEmployeeFormPage: React.FC = observer(() => {
     try {
       company.setIsLoading(true);
       const response = await addEpmloyee(employeeInfo);
-      console.log(response);
+      if (response.status === 201) {
+        toast.success("updated successfully", {
+          autoClose: 2000,
+        });
+      }
     } catch (error: any) {
       setError(error.message);
     } finally {

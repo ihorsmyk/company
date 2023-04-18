@@ -8,9 +8,11 @@ import {
   updateProjectById,
 } from "../../utils/services/companyAPI";
 import Loader from "../../components/Loader/Loader";
+import { toast } from "react-toastify";
 import "./UpdateProjectPage.scss";
 
 const UpdateProjectPage: React.FC = observer(() => {
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const [projectInfo, setProjectInfo] = useState<any>({
     name: "",
@@ -27,7 +29,7 @@ const UpdateProjectPage: React.FC = observer(() => {
       };
       setProjectInfo(info);
     } catch (error: any) {
-      company.setError(error.message);
+      setError(error.message);
     } finally {
       company.setIsLoading(false);
     }
@@ -37,9 +39,13 @@ const UpdateProjectPage: React.FC = observer(() => {
     try {
       company.setIsLoading(true);
       const response = await updateProjectById(projectId, projectInfo);
-      console.log(response);
+      if (response.status === 200) {
+        toast.success("updated successfully", {
+          autoClose: 2000,
+        });
+      }
     } catch (error: any) {
-      company.setError(error.message);
+      setError(error.message);
     } finally {
       company.setIsLoading(false);
     }
@@ -48,6 +54,13 @@ const UpdateProjectPage: React.FC = observer(() => {
   useEffect(() => {
     getProjectInfo(Number(projectId));
   }, [projectId]);
+
+  useEffect(() => {
+    if (!error) return;
+    toast.error(error, {
+      autoClose: 2000,
+    });
+  }, [error]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target);
@@ -64,16 +77,13 @@ const UpdateProjectPage: React.FC = observer(() => {
 
   return (
     <>
-      <Link className="project__go-back" to={"/projects"}>
-        CANCEL
-      </Link>
-
       {company.isLoading && <Loader />}
 
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className="form" onSubmit={handleSubmit}>
+        <label className="form__label">
           project name:
           <input
+            className="form__input"
             type="text"
             id="name"
             name="name"
@@ -81,7 +91,15 @@ const UpdateProjectPage: React.FC = observer(() => {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">update</button>
+        <div className="form__btns">
+          <button className="form__ok" type="submit">
+            UPDATE
+          </button>
+
+          <Link className="form__cancel" to={"/projects"}>
+            CANCEL
+          </Link>
+        </div>
       </form>
     </>
   );

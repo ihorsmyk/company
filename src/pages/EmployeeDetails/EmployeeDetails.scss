@@ -1,0 +1,68 @@
+.employee {
+  margin-top: 20px;
+  padding: 17px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+
+  &__go-back {
+    height: 40px;
+    width: 30px;
+    color: var(--primary-text);
+    transition: color 150ms linear;
+
+    &:hover,
+    &:focus {
+      color: var(--blue);
+    }
+  }
+
+  &__span {
+    font-weight: 300;
+    font-size: 28px;
+    color: var(--blue);
+    margin-right: 10px;
+  }
+
+  &__fullname {
+    margin-top: 20px;
+    font-weight: 100;
+    font-size: 48px;
+  }
+
+  &__email,
+  &__position,
+  &__projects {
+    font-weight: 300;
+    font-size: 33px;
+  }
+
+  &__btns {
+    display: flex;
+  }
+
+  &__update,
+  &__delete {
+    font-weight: 400;
+    font-size: 22px;
+    color: inherit;
+    background-color: var(--primary-background);
+    padding: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 2px;
+    transition: background-color 150ms linear;
+    margin-top: 15px;
+    z-index: 2;
+
+    &:hover,
+    &:focus {
+      background-color: var(--blue);
+    }
+  }
+
+  &__delete {
+    margin-left: 10px;
+    padding: 18px;
+  }
+}

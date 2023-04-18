@@ -3,8 +3,14 @@
   color: var(--primary-text);
   font-weight: 600;
   font-size: 25px;
+  transition: color 150ms linear;
+  &:hover,
+  &:focus {
+    color: var(--blue);
+  }
 
   &__span {
     color: var(--blue);
+    transition: color 150ms linear;
   }
 }

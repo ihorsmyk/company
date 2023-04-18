@@ -44,16 +44,21 @@ const EmployeeListPage: FC = observer(() => {
       <ul className="employee-list">
         {company.employeeList?.map((e: EmployeeType) => {
           return (
-            <li key={e.id} className="employee-list__item">
+            <li
+              key={e.id}
+              className="employee-list__item"
+            >
               <Link
+                // data-aos="zoom-out"
+                // data-aos-duration="500"
                 state={{ from: location }}
                 to={String(e.id)}
                 className="employee-list__link"
               >
                 <h2 className="employee-list__fullname">
                   {e?.firstName + " " + e?.lastName}
-                  <p className="employee-list__position">{e?.position}</p>
                 </h2>
+                <p className="employee-list__position">{e?.position}</p>
               </Link>
             </li>
           );

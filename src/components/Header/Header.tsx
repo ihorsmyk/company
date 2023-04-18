@@ -8,7 +8,7 @@ import "./Header.scss";
 
 const Header: FC = observer(() => {
   return (
-    <header className="header">
+    <header className="header container">
       <Logo />
       <Navigation />
       {company.token && <AdminMenu />}

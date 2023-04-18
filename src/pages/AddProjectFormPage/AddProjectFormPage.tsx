@@ -1,12 +1,14 @@
 import { observer } from "mobx-react-lite";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addProject } from "../../utils/services/companyAPI";
 import company from "../../utils/stores/company";
 import "./AddProjectFormPage.scss";
 import Loader from "../../components/Loader/Loader";
+import { toast } from "react-toastify";
 
 const AddProjectFormPage: React.FC = observer(() => {
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const [projectInfo, setProjectInfo] = useState<any>({
     name: "",
@@ -16,9 +18,13 @@ const AddProjectFormPage: React.FC = observer(() => {
     try {
       company.setIsLoading(true);
       const response = await addProject(projectInfo);
-      console.log(response);
+      if (response.status === 201) {
+        toast.success("updated successfully", {
+          autoClose: 2000,
+        });
+      }
     } catch (error: any) {
-      company.setError(error.message);
+      setError(error.message);
     } finally {
       company.setIsLoading(false);
     }
@@ -35,6 +41,13 @@ const AddProjectFormPage: React.FC = observer(() => {
     const { name, value } = e.target;
     setProjectInfo((prev: any) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    if (!error) return;
+    toast.error(error, {
+      autoClose: 2000,
+    });
+  }, [error]);
 
   return (
     <>

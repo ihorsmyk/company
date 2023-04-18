@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import "./UpdateEmployeePage.scss";
 
 const UpdateEmployeePage: React.FC = observer(() => {
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const [employeeInfo, setEmployeeInfo] = useState<any>({
     firstName: "",
@@ -37,13 +38,16 @@ const UpdateEmployeePage: React.FC = observer(() => {
       };
       setEmployeeInfo(info);
     } catch (error: any) {
-      company.setError(error.message);
+      setError(error.message);
     } finally {
       company.setIsLoading(false);
     }
   };
 
-  const updateEmployeeInfo = async (employeeId: number, employeeInfo: any) => {
+  const updateEmployeeInfo = async (
+    employeeId: number,
+    employeeInfo: any
+  ): Promise<void> => {
     try {
       company.setIsLoading(true);
       const response = await updateEmployeeById(employeeId, employeeInfo);
@@ -53,7 +57,7 @@ const UpdateEmployeePage: React.FC = observer(() => {
         });
       }
     } catch (error: any) {
-      company.setError(error.message);
+      setError(error.message);
     } finally {
       company.setIsLoading(false);
     }
@@ -62,6 +66,13 @@ const UpdateEmployeePage: React.FC = observer(() => {
   useEffect(() => {
     getEmployeeInfo(Number(employeeId));
   }, [employeeId]);
+
+  useEffect(() => {
+    if (!error) return;
+    toast.error(error, {
+      autoClose: 2000,
+    });
+  }, [error]);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -77,16 +88,13 @@ const UpdateEmployeePage: React.FC = observer(() => {
 
   return (
     <>
-      <Link className="employee__go-back" to={"/employees"}>
-        CANCEL
-      </Link>
-
       {company.isLoading && <Loader />}
 
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className="form" onSubmit={handleSubmit}>
+        <label className="form__label">
           first name:
           <input
+            className="form__input"
             type="text"
             id="firstName"
             name="firstName"
@@ -94,9 +102,10 @@ const UpdateEmployeePage: React.FC = observer(() => {
             onChange={handleChange}
           />
         </label>
-        <label>
+        <label className="form__label">
           last name:
           <input
+            className="form__input"
             type="text"
             id="lastName"
             name="lastName"
@@ -104,9 +113,10 @@ const UpdateEmployeePage: React.FC = observer(() => {
             onChange={handleChange}
           />
         </label>
-        <label>
+        <label className="form__label">
           email:
           <input
+            className="form__input"
             type="email"
             id="email"
             name="email"
@@ -114,10 +124,10 @@ const UpdateEmployeePage: React.FC = observer(() => {
             onChange={handleChange}
           />
         </label>
-        <label>
+        <label className="form__label">
           position:
           <select
-            className=""
+            className="form__select"
             id="position"
             name="position"
             value={employeeInfo?.position}
@@ -130,7 +140,15 @@ const UpdateEmployeePage: React.FC = observer(() => {
             <option value={Position.HR}>HR</option>
           </select>
         </label>
-        <button type="submit">Update</button>
+        <div className="form__btns">
+          <button className="form__ok" type="submit">
+            UPDATE
+          </button>
+
+          <Link className="form__cancel" to={"/employees"}>
+            CANCEL
+          </Link>
+        </div>
       </form>
     </>
   );

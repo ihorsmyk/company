@@ -40,8 +40,9 @@ a {
 }
 
 body {
-  font-weight: 600;
-  font-size: 18px;
+  background-color: var(--secondary-background);
+  font-weight: 400;
+  font-size: 22px;
   font-family: "Darker Grotesque", sans-serif;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -60,4 +61,60 @@ code {
   --blue: #007bff;
   --primary-text: #444444;
   --secondary-text: #000000;
+  --primary-background: #ffffff;
+  --secondary-background: #f3f3f3;
+}
+
+.form {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  background-color: var(--secondary-background);
+  border-radius: 2px;
+  padding: 15px;
+  color: inherit;
+
+  &__label {
+    color: (--var(--blue));
+  }
+
+  &__input {
+    width: 100%;
+    font-size: 25px;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    margin: 2px;
+    padding: 8px;
+  }
+
+  &__btns {
+    display: flex;
+    column-gap: 15px;
+  }
+
+  &__ok,
+  &__cancel {
+    font-weight: 400;
+    font-size: 22px;
+    color: inherit;
+    background-color: var(--primary-background);
+    padding: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 2px;
+    transition: background-color 150ms linear;
+    margin-top: 30px;
+
+    &:hover,
+    &:focus {
+      background-color: var(--blue);
+    }
+  }
+
+  &__delete {
+    margin-left: 10px;
+    padding: 18px;
+  }
 }

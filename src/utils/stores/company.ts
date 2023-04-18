@@ -11,9 +11,6 @@ class Company {
   // token: boolean = false;
 
   isLoading: boolean = false;
-  error: string = "";
-
-  admin: any = null;
 
   employeeList: Array<EmployeeType> = [];
   projectList: Array<ProjectType> = [];
@@ -35,10 +32,6 @@ class Company {
 
   setToken(set: boolean): void {
     this.token = set;
-  }
-
-  setError(set: string): void {
-    this.error = set;
   }
 
   setIsLoading(set: boolean): void {
@@ -75,4 +68,5 @@ class Company {
   }
 }
 
-export default new Company();
+const company = new Company();
+export default company;
