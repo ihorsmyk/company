@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import company from "../../utils/stores/company";
 import Loader from "../../components/Loader/Loader";
-import "./AddEmployeeFormPage.scss";
 import { toast } from "react-toastify";
+import "./AddEmployeeFormPage.scss";
 
 const AddEmployeeFormPage: React.FC = observer(() => {
   const [error, setError] = useState<string | null>(null);
@@ -56,11 +56,11 @@ const AddEmployeeFormPage: React.FC = observer(() => {
     <>
       {company.isLoading && <Loader />}
 
-      <form className="add-employee-form" onSubmit={handleSubmit}>
-        <label>
+      <form className="form" onSubmit={handleSubmit}>
+        <label className="form__label">
           name:
           <input
-            className="add-employee-form__firstname"
+            className="form__input"
             autoComplete="off"
             type="text"
             name="firstName"
@@ -71,7 +71,7 @@ const AddEmployeeFormPage: React.FC = observer(() => {
         <label>
           surname:
           <input
-            className="add-employee-form__lastname"
+            className="form__input"
             autoComplete="off"
             type="text"
             name="lastName"
@@ -82,7 +82,7 @@ const AddEmployeeFormPage: React.FC = observer(() => {
         <label>
           email:
           <input
-            className="add-employee-form__email"
+            className="form__input"
             autoComplete="off"
             type="email"
             name="email"
@@ -94,7 +94,7 @@ const AddEmployeeFormPage: React.FC = observer(() => {
         <label>
           position:
           <select
-            className="add-employee-form__position"
+            className="form__input"
             name="position"
             onChange={handleChange}
             id="position"
@@ -106,14 +106,14 @@ const AddEmployeeFormPage: React.FC = observer(() => {
             <option value={Position.HR}> HR</option>
           </select>
         </label>
-
-        <Link className="add-employee__go-back" to={"/employees"}>
-          CANCEL
-        </Link>
-
-        <button className="add-employee-form__btn" type="submit">
-          Submit
-        </button>
+        <div className="form__btns">
+          <button className="form__ok" type="submit">
+            ADD
+          </button>
+          <Link className="form__cancel" to={"/employees"}>
+            CANCEL
+          </Link>
+        </div>
       </form>
     </>
   );
