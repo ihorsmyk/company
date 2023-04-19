@@ -1,3 +1,25 @@
 .admin-menu {
   margin-left: auto;
+  display: flex;
+
+  &__name {
+    font-size: 22px;
+    margin-top: 2px;
+  }
+
+  &__btn {
+    font-weight: 600;
+    font-size: 16px;
+    background-color: var(--secondary-background);
+    padding: 5px;
+    border: none;
+    border-radius: 2px;
+    transition: background-color 150ms linear;
+    margin-left: 10px;
+
+    &:hover,
+    &:focus {
+      background-color: var(--blue);
+    }
+  }
 }

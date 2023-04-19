@@ -45,6 +45,7 @@ const ProjectDetails: React.FC = observer(() => {
       }
     })(Number(projectId));
 
+    company.cleanProjectList();
     setIsModalOpen(false);
   };
 

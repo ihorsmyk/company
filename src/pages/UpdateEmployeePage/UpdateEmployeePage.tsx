@@ -79,7 +79,7 @@ const UpdateEmployeePage: React.FC = observer(() => {
     setEmployeeInfo((prev: any) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     updateEmployeeInfo(Number(employeeId), employeeInfo);
     company.cleanEmployeeList();
@@ -133,13 +133,14 @@ const UpdateEmployeePage: React.FC = observer(() => {
             value={employeeInfo?.position}
             onChange={handleChange}
           >
-            <option value={Position.FRONTEND}>frontend</option>
-            <option value={Position.BACKEND}>backend</option>
-            <option value={Position.DEVOPS}>devops</option>
-            <option value={Position.MANAGER}>manager</option>
+            <option value={Position.FRONTEND}>FRONTEND</option>
+            <option value={Position.BACKEND}>BACKEND</option>
+            <option value={Position.DEVOPS}>DEVOPS</option>
+            <option value={Position.MANAGER}>MANAGER</option>
             <option value={Position.HR}>HR</option>
           </select>
         </label>
+        
         <div className="form__btns">
           <button className="form__ok" type="submit">
             UPDATE

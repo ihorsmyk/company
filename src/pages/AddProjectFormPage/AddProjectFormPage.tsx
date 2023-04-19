@@ -19,7 +19,7 @@ const AddProjectFormPage: React.FC = observer(() => {
       company.setIsLoading(true);
       const response = await addProject(projectInfo);
       if (response.status === 201) {
-        toast.success("updated successfully", {
+        toast.success("added successfully", {
           autoClose: 2000,
         });
       }
@@ -52,11 +52,12 @@ const AddProjectFormPage: React.FC = observer(() => {
   return (
     <>
       {company.isLoading && <Loader />}
-      <form className="add-project-form" onSubmit={handleSubmit}>
-        <label>
+
+      <form className="form" onSubmit={handleSubmit}>
+        <label className="form__label">
           name:
           <input
-            className="add-project-form__input"
+            className="form__input"
             autoComplete="off"
             type="text"
             name="name"
@@ -64,13 +65,15 @@ const AddProjectFormPage: React.FC = observer(() => {
             onChange={handleChange}
           />
         </label>
-        <Link className="add-project-form__go-back" to={"/projects"}>
-          CANCEL
-        </Link>
 
-        <button className="add-project-form__btn" type="submit">
-          Submit
-        </button>
+        <div className="form__btns">
+          <button className="form__ok" type="submit">
+            ADD
+          </button>
+          <Link className="form__cancel" to={"/projects"}>
+            CANCEL
+          </Link>
+        </div>
       </form>
     </>
   );

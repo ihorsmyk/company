@@ -49,6 +49,7 @@ class Company {
         employees.push(data.content[i]);
       }
     }
+    employees.sort((a, b) => a.firstName.localeCompare(b.firstName));
     this.employeeList = [...this.employeeList, ...employees];
     this.totalEmployees = data.totalElements;
   }
@@ -63,6 +64,7 @@ class Company {
         projects.push(data[i]);
       }
     }
+    projects.sort((a, b) => a.name.localeCompare(b.name));
     this.projectList = [...this.projectList, ...projects];
     this.totalProjects = data.length;
   }

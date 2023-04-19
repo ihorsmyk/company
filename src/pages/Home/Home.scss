@@ -1,0 +1,21 @@
+.home {
+  padding: 15px;
+  text-align: center;
+
+  &__title {
+    margin-top: 22px;
+    font-family: "Galdeano", sans-serif;
+    color: var(--primary-text);
+    font-weight: 600;
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  &__description {
+    color: var(--seconday-text);
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 400;
+    text-align: justify;
+  }
+}
