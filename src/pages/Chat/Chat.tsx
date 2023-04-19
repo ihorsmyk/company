@@ -166,17 +166,12 @@ const ChatRoom: FC = () => {
             <div className="chat__content">
               <ul className="chat__messages">
                 {publicChats.map((chat: any, index: number) => (
-                  <li
-                    className="chat__message"
-                    key={index}
-                  >
+                  <li className="chat__message" key={index}>
                     {chat.senderName !== userData.username && (
-                      <p className="chat__sender">{chat.senderName+ ":"}</p>
+                      <p className="chat__sender">{chat.senderName + ":"}</p>
                     )}
                     {chat.senderName === userData.username && (
-                      <p className="chat__sender">
-                        {chat.senderName + ":"}
-                      </p>
+                      <p className="chat__sender">{chat.senderName + ":"}</p>
                     )}
                     <p className="chat__message-data">{chat.message}</p>
                   </li>
